@@ -1,0 +1,40 @@
+version: '3'
+services:
+  docker_sql:
+    container_name: docker_sql
+    image: mcr.microsoft.com/mssql/server:latest
+    ports:
+      - "1443:1433"
+    networks:
+      - "school"
+    environment:
+      ACCEPT_EULA: Y
+      SA_PASSWORD: yourStrong(!)Password
+    volumes:
+      - mssqlsystem:/var/opt/mssql
+      - mssqluser:/var/opt/sqlserver
+    restart: always
+  docker_web:
+    container_name: docker_web
+    build:
+      context: .
+      dockerfile: ./Dockerfile
+    image: dockerexampleweb
+    ports:
+      - "8080:80"
+    networks:
+      - "school"
+    depends_on:
+      - docker_sql
+    restart: always
+volumes:
+  mssqlsystem:
+    external: true
+  mssqluser:
+    external: true
+networks:
+  school:
+    driver: bridge
+    ipam:
+      config:
+        - subnet: 10.0.0.1/24

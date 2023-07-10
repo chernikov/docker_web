@@ -5,11 +5,14 @@ internal class Database
 {
     public static void MigrateDatabase(WebApplication app)
     {
-        var dbContext = app.Services.GetService<SchoolContext>();
-        var pendingMigration = dbContext!.Database.GetPendingMigrations();
-        if (pendingMigration.Any())
+        using (var container = app.Services.CreateScope())
         {
-            dbContext.Database.Migrate();
+            var dbContext = container.ServiceProvider.GetService<SchoolContext>();
+            var pendingMigration = dbContext!.Database.GetPendingMigrations();
+            if (pendingMigration.Any())
+            {
+                dbContext.Database.Migrate();
+            }
         }
     }
 }

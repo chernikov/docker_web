@@ -1,5 +1,9 @@
+using dockerExampleWeb2.Controllers;
 using dockerExampleWeb2.Models;
 using Microsoft.EntityFrameworkCore;
+using MongoDB.Driver;
+using Microsoft.Extensions.Caching.Redis;
+using dockerExampleWeb2.Options;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -12,22 +16,25 @@ var connectionString = configuration.GetConnectionString("Default");
 builder.Services.AddDbContext<SchoolContext>(options =>
        options.UseSqlServer(connectionString));
 
+var mongoConnectionString = configuration.GetConnectionString("Mongo");
+builder.Services.AddScoped(c => new SchoolMongoContext(mongoConnectionString));
+
+
+
+var redisCacheSettings = configuration.GetSection("RedisCacheSettings").Get<RedisCacheSettings>();
+builder.Services.AddSingleton(redisCacheSettings!);
+
+builder.Services.AddStackExchangeRedisCache(options =>
+{
+    options.Configuration = redisCacheSettings!.ConnectionString;
+    options.InstanceName = redisCacheSettings!.InstanceName;
+});
+
 
 var app = builder.Build();
 
 
 //Database.MigrateDatabase(app);
-using (var container = app.Services.CreateScope())
-{
-    var dbContext = container.ServiceProvider.GetService<SchoolContext>();
-    var pendingMigration = dbContext!.Database.GetPendingMigrations();
-    if (pendingMigration.Any())
-    {
-        dbContext.Database.Migrate();
-    }
-}
-
-
 // Configure the HTTP request pipeline.
 
 app.UseAuthorization();
