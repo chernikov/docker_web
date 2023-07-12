@@ -1,9 +1,5 @@
-﻿using Microsoft.Extensions.Caching.Distributed;
-
-namespace dockerExampleWeb2.Controllers
+﻿namespace dockerExampleWeb2.Controllers
 {
-
-    
     public class RedisController : Controller
     {
         private readonly IDistributedCache cache;

@@ -4,6 +4,9 @@ using Microsoft.EntityFrameworkCore;
 using MongoDB.Driver;
 using Microsoft.Extensions.Caching.Redis;
 using dockerExampleWeb2.Options;
+using Elastic.Clients.Elasticsearch;
+using Microsoft.Extensions.DependencyInjection;
+using Elastic.Transport;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -29,6 +32,12 @@ builder.Services.AddStackExchangeRedisCache(options =>
     options.Configuration = redisCacheSettings!.ConnectionString;
     options.InstanceName = redisCacheSettings!.InstanceName;
 });
+
+
+
+var elasticSearchOptions = configuration.GetSection("ElasticSearchSettings").Get<ElasticSearchOptions>()!;
+
+builder.Services.AddSingleton<ElasticSearchOptions>(elasticSearchOptions);
 
 
 var app = builder.Build();
