@@ -3,7 +3,11 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.6.33815.320
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "dockerExampleWeb2", "dockerExampleWeb2\dockerExampleWeb2.csproj", "{1DCC5503-5F66-4EF1-A6D5-A049F2C065ED}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "dockerExampleWeb2", "dockerExampleWeb2\dockerExampleWeb2.csproj", "{1DCC5503-5F66-4EF1-A6D5-A049F2C065ED}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RabbitMqSender", "RabbitMqSender\RabbitMqSender.csproj", "{BA7F170D-5E00-42A3-9175-B7E7E415B902}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RabbitMqConsumer", "RabbitMqConsumer\RabbitMqConsumer.csproj", "{52CD97C0-81FD-4389-B065-3C1D6E7C4CE9}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -15,6 +19,14 @@ Global
 		{1DCC5503-5F66-4EF1-A6D5-A049F2C065ED}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{1DCC5503-5F66-4EF1-A6D5-A049F2C065ED}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{1DCC5503-5F66-4EF1-A6D5-A049F2C065ED}.Release|Any CPU.Build.0 = Release|Any CPU
+		{BA7F170D-5E00-42A3-9175-B7E7E415B902}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{BA7F170D-5E00-42A3-9175-B7E7E415B902}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{BA7F170D-5E00-42A3-9175-B7E7E415B902}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{BA7F170D-5E00-42A3-9175-B7E7E415B902}.Release|Any CPU.Build.0 = Release|Any CPU
+		{52CD97C0-81FD-4389-B065-3C1D6E7C4CE9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{52CD97C0-81FD-4389-B065-3C1D6E7C4CE9}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{52CD97C0-81FD-4389-B065-3C1D6E7C4CE9}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{52CD97C0-81FD-4389-B065-3C1D6E7C4CE9}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
